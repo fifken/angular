@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Age</th>
       <th>Job</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,9 @@
       <td>{{ customer.name }}</td>
       <td>{{ customer.age }}</td>
       <td>{{ customer.job }}</td>
+      <td>
+        <button (click)="onDelete(i)">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>

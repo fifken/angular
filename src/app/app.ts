@@ -59,6 +59,15 @@ export class App {
     { name: 'Charlie White', age: 40, job: 'Tester' }
   ];
 
-  uptTableParent: Customer[] = this.customers;
+  uptTableParent: Customer[] = this.customers; 
 
+  removeCustomer(index: number): void {
+  this.customers.splice(index, 1);
+  this.uptTableParent = [...this.customers]; // trigger update ke child
+  }
+
+  addCustomerFromChild(newCust: Customer): void {
+    this.customers.push(newCust);
+    this.uptTableParent = [...this.customers]; // update agar terdeteksi perubahan
+  }
 }

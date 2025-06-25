@@ -13,9 +13,12 @@
     <p>_____________________________________</p>
     <button (click)="showTable()">View Table</button>
     <div *ngIf="isShowTable">
-        <app-table [uptTableChild]="uptTableParent"></app-table>
+        <app-table 
+        [uptTableChild]="uptTableParent"
+        (deleteCustomer)="removeCustomer($event)">
+        </app-table>
         <br>
-        <app-form></app-form>
+        <app-form (customerAdded)="addCustomerFromChild($event)"></app-form>
     </div>
   </div>
   

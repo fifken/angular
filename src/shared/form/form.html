@@ -1,3 +1,13 @@
-<p>Add Customer</p>
+<h3>Add New Customer</h3>
+<form (ngSubmit)="addCustomer()">
+  <label>Name:</label><br />
+  <input [(ngModel)]="newCustomer.name" name="name" required /><br />
 
-<!-- form add customer -->
+  <label>Age:</label><br />
+  <input type="number" [(ngModel)]="newCustomer.age" name="age" required /><br />
+
+  <label>Job:</label><br />
+  <input [(ngModel)]="newCustomer.job" name="job" /><br />
+
+  <button type="submit">Add Customer</button>
+</form>

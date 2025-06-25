@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Customer } from '../../model/customer.interface';
 import { App } from '../../app/app';
@@ -16,4 +16,10 @@ import { App } from '../../app/app';
 })
 export class Table {
   @Input() uptTableChild: Customer[] = [];
+
+  @Output() deleteCustomer = new EventEmitter<number>();
+
+  onDelete(index: number) {
+    this.deleteCustomer.emit(index);
+  }
 }
