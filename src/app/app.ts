@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Table } from '../shared/table/table';
 import { CommonModule } from '@angular/common';
 import { admin } from '../model/admin.interface';
 import { Customer } from '../model/customer.interface';
 import { Form } from '../shared/form/form';
-
+import { CustomerData } from '../services/customer-data';
 
 
 @Component({
@@ -13,15 +13,16 @@ import { Form } from '../shared/form/form';
   standalone: true,
   imports: [
     CommonModule,
-    RouterOutlet,
+    // RouterOutlet,
     Table,
     Form
   ],
+  providers: [CustomerData],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 
-export class App {
+export class App implements OnInit {
   protected title = 'first-project';
   index: number = 1;
 
@@ -50,24 +51,26 @@ export class App {
   restrictAdmin(): void {
     this.isRestrict = true;
   }
+  
+  customers: Customer[] = [];
 
-  customers: Customer[] = [
-    { name: 'John Doe', age: 30, job: 'Developer' },
-    { name: 'Jane Smith', age: 25, job: 'Designer' },
-    { name: 'Alice Johnson', age: 28, job: 'Manager' },
-    { name: 'Bob Brown', age: 35, job: 'Analyst' },
-    { name: 'Charlie White', age: 40, job: 'Tester' }
-  ];
+  constructor(private customerDataService: CustomerData){}
+
+  ngOnInit(): void {
+    this.customers = this.customerDataService.getData();
+    this.uptTableParent = this.customers;
+  }
+
 
   uptTableParent: Customer[] = this.customers; 
 
-  removeCustomer(index: number): void {
-  this.customers.splice(index, 1);
+  onRemoveCustomer(index: number): void {
+  this.customers = this.customerDataService.removeData(index);
   this.uptTableParent = [...this.customers]; // trigger update ke child
   }
 
-  addCustomerFromChild(newCust: Customer): void {
-    this.customers.push(newCust);
+  onAddCustomerFromChild(newCust: Customer): void {
+    this.customers = this.customerDataService.addData(newCust);
     this.uptTableParent = [...this.customers]; // update agar terdeteksi perubahan
   }
 }

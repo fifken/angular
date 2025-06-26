@@ -4,6 +4,7 @@
     <tr>
       <th>No</th>
       <th>Name</th>
+      <th>NIK</th>
       <th>Age</th>
       <th>Job</th>
       <th>Actions</th>
@@ -13,6 +14,7 @@
     <tr *ngFor="let customer of uptTableChild, let i = index">
       <td>{{ i + 1 }}</td>
       <td>{{ customer.name }}</td>
+      <td>{{customer.nik}}</td>
       <td>{{ customer.age }}</td>
       <td>{{ customer.job }}</td>
       <td>

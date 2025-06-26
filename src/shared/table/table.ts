@@ -9,7 +9,7 @@ import { App } from '../../app/app';
   standalone: true,
   imports: [
     CommonModule,
-    RouterOutlet
+    // RouterOutlet
   ],
   templateUrl: './table.html',
   styleUrl: './table.scss'

@@ -15,10 +15,10 @@
     <div *ngIf="isShowTable">
         <app-table 
         [uptTableChild]="uptTableParent"
-        (deleteCustomer)="removeCustomer($event)">
+        (deleteCustomer)="onRemoveCustomer($event)">
         </app-table>
         <br>
-        <app-form (customerAdded)="addCustomerFromChild($event)"></app-form>
+        <app-form (customerAdded)="onAddCustomerFromChild($event)"></app-form>
     </div>
   </div>
   

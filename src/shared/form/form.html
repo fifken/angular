@@ -1,13 +1,41 @@
 <h3>Add New Customer</h3>
-<form (ngSubmit)="addCustomer()">
+
+<form [formGroup]="customerForm" (ngSubmit)="addCustomer()">
+
+  <!-- Name -->
   <label>Name:</label><br />
-  <input [(ngModel)]="newCustomer.name" name="name" required /><br />
+  <input formControlName="name" />
+  <div *ngIf="customerForm.get('name')?.invalid && customerForm.get('name')?.touched" style="color:red;">
+    Name is required.
+  </div><br />
 
+  <!-- NIK -->
+  <label>NIK:</label><br />
+  <input formControlName="nik" />
+  <div *ngIf="customerForm.get('nik')?.touched && customerForm.get('nik')?.invalid" style="color:red;">
+    <div *ngIf="customerForm.get('nik')?.errors?.['required']">NIK is required.</div>
+    <div *ngIf="customerForm.get('nik')?.errors?.['pattern']">NIK must be numeric only.</div>
+    <div *ngIf="customerForm.get('nik')?.errors?.['minlength'] || customerForm.get('nik')?.errors?.['maxlength']">
+      NIK must be exactly 16 digits.
+    </div>
+    <div *ngIf="customerForm.get('nik')?.errors?.['nikTaken']" style="color:red">
+      NIK already exists.
+    </div>
+  </div><br />
+  
+  <!-- Age -->
   <label>Age:</label><br />
-  <input type="number" [(ngModel)]="newCustomer.age" name="age" required /><br />
+  <input type="number" formControlName="age" />
+  <div *ngIf="customerForm.get('age')?.invalid && customerForm.get('age')?.touched" style="color:red;">
+    <div *ngIf="customerForm.get('age')?.errors?.['required']">Age is required.</div>
+    <div *ngIf="customerForm.get('age')?.errors?.['min']">Min. 17 years old.</div>
+  </div><br />
 
+  <!-- Job -->
   <label>Job:</label><br />
-  <input [(ngModel)]="newCustomer.job" name="job" /><br />
+  <input formControlName="job" /><br /><br />
 
+  <!-- Submit -->
   <button type="submit">Add Customer</button>
+
 </form>
